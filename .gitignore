@@ -1,6 +1,6 @@
 ##Ignore files##
 terraform.tfvars
 terraform.tfstate
-terraform.tfstata.backup
+terraform.tfstate.backup
 keys/felipe-rovai-key.pem
 .terraform/*
