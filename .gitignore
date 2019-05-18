@@ -3,3 +3,4 @@ terraform.tfvars
 terraform.tfstate
 terraform.tfstata.backup
 keys/felipe-rovai-key.pem
+.terraform/*
