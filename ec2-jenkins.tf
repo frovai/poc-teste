@@ -41,7 +41,7 @@ resource "aws_instance" "jenkins-instance" {
 }
 
 resource "null_resource" "Configura-Docker" {
-  depends_on = ["aws_instance.jenkins-instance"]
+  depends_on = ["aws_volume_attachment.jenkins-ebs-att"]
   connection {
     type     = "ssh"
     user     = "ec2-user"
@@ -64,12 +64,14 @@ resource "null_resource" "Configura-Docker" {
 }
 
 resource "aws_volume_attachment" "jenkins-ebs-att" {
+  depends_on = ["aws_ebs_volume.jenkins-ebs"]
   device_name = "/dev/xvdf"
   volume_id   = "${aws_ebs_volume.jenkins-ebs.id}"
   instance_id = "${aws_instance.jenkins-instance.id}"
 }
 
 resource "aws_ebs_volume" "jenkins-ebs" {
+  depends_on = ["aws_instance.jenkins-instance"]
   availability_zone = "${var.aws_availability_zone}"
   size              = 20
   type = "gp2"

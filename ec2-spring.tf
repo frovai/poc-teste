@@ -16,12 +16,14 @@ resource "aws_instance" "spring-instance" {
 }
 
 resource "aws_volume_attachment" "spring-ebs-att" {
+  depends_on = ["aws_ebs_volume.spring-ebs"]
   device_name = "/dev/xvdf"
   volume_id   = "${aws_ebs_volume.spring-ebs.id}"
   instance_id = "${aws_instance.spring-instance.id}"
 }
 
 resource "aws_ebs_volume" "spring-ebs" {
+  depends_on = ["aws_instance.spring-instance"]
   availability_zone = "${var.aws_availability_zone}"
   size              = 20
   type = "gp2"
