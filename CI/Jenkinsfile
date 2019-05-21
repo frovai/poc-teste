@@ -10,7 +10,7 @@ pipeline {
             steps {
                 cleanWs()
                 sh '''
-                git clone --branch teste-dockerindocker https://github.com/frovai/poc-teste.git
+                git clone --branch develop https://github.com/frovai/poc-teste.git
                 '''
             }
         }
