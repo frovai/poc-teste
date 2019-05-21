@@ -2,7 +2,7 @@ pipeline {
     agent { 
         docker {
             image 'maven:2'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /var/run/docker.sock:/var/run/docker.sock --user=root'
         }
     }            
     stages {
@@ -10,7 +10,7 @@ pipeline {
             steps {
                 cleanWs()
                 sh '''
-                git clone --branch develop https://github.com/frovai/poc-teste.git
+                git clone --branch teste-dockerindocker https://github.com/frovai/poc-teste.git
                 '''
             }
         }
@@ -31,12 +31,22 @@ pipeline {
                 '''
             }
         } 
-        stage('Maven Build Artifact') {
+        //stage('INFRA - TESTE') {
+        //    steps {
+        //        sh '''
+        //        '''
+        //    }
+        //}    
+        stage('Maven Deploy Artifact') {
             steps {
+            withCredentials([sshUserPrivateKey(credentialsId: 'bastion_key', keyFileVariable: 'bastion_key')]) {
                 sh '''
-                cd poc-teste/spring-boot-dockerize/
-                docker build -t spring:1 .
+                cd poc-teste/spring-boot-dockerize/target
+                scp -i ${bastion_key} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER}:/home/ec2-user/target/spring-boot-docker.jar
+                ssh -o StrictHostKeyChecking=no -i ${bastion_key} ec2-user@${SPRING_SERVER} "sudo docker build -f /home/ec2-user/Dockerfile -t spring:1 ."
+                ssh -o StrictHostKeyChecking=no -i ${bastion_key} ec2-user@${SPRING_SERVER} "sudo docker run -p 80:8080 -di spring:1"
                 '''
+                }
             }
         }        
     }
