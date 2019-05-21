@@ -1,12 +1,43 @@
 pipeline {
-    agent {
-        docker { image 'node:7-alpine' }
-    }
+    agent { 
+        docker {
+            image 'maven:2'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }            
     stages {
-        stage('Test') {
+        stage('Checkout') {
             steps {
-                sh 'node --version'
+                cleanWs()
+                sh '''
+                git clone --branch develop https://github.com/frovai/poc-teste.git
+                '''
             }
         }
+        stage('Maven Install') {
+            steps {
+                sh '''
+                cd poc-teste/spring-boot-dockerize/
+                mvn compile
+                mvn install
+                '''
+            }
+        }
+        stage('Maven Test') {
+            steps {
+                sh '''
+                cd poc-teste/spring-boot-dockerize/
+                mvn test
+                '''
+            }
+        } 
+        stage('Maven Build Artifact') {
+            steps {
+                sh '''
+                cd poc-teste/spring-boot-dockerize/
+                docker build -t spring:1 .
+                '''
+            }
+        }        
     }
 }
