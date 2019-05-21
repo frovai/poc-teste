@@ -38,6 +38,14 @@ resource "aws_instance" "jenkins-instance" {
     source      = "keys/felipe-rovai-key.pem"
     destination = "/tmp/felipe-rovai-key.pem"
   }
+  provisioner "file" {
+    source      = "docker/Dockerfile-jenkins-docker-in-docker"
+    destination = "/home/ec2-user/Dockerfile-jenkins-docker-in-docker"
+  }
+  provisioner "file" {
+    source      = "templates/docker.service"
+    destination = "/home/ec2-user/docker.service"
+  }
 }
 
 resource "null_resource" "Configura-Docker" {
