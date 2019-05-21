@@ -4,6 +4,8 @@ sudo yum update -y
 sudo yum install mtr htop telnet sysstat tcpdump docker.x86_64 -y
 sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
 sudo chmod +x /usr/bin/docker-compose
+sudo mv /home/ec2-user/docker.service /usr/lib/systemd/system/docker.service
+sudo systemctl daemon-reload
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo docker pull jenkins:latest
@@ -31,4 +33,5 @@ sudo chmod 777 /etc/fstab
 sudo echo "/dev/jenkins/jenkinslv   /home/ec2-user/jenkins    ext4    defaults    0    0" >> /etc/fstab
 sudo chmod 644 /etc/fstab
 sudo chown -R 1000:1000 /home/ec2-user/jenkins
+sudo /usr/bin/docker-compose -f /home/ec2-user/jenkins.yml build --no-cache
 sudo /usr/bin/docker-compose -f /home/ec2-user/jenkins.yml up -d
