@@ -1,17 +1,24 @@
 package hello;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.*;
-
+import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.assertThat;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class GreeterTest {
 
-	private Greeter greeter = new Greeter();
+    private final Greeter greeter = new Greeter();
 
-	@Test
-	public void greeterSaysHello() {
-		assertThat(greeter.sayHello(), containsString("Hello"));
-	}
+    @Test
+    public void greeterSaysHello() {
+
+        assertThat(greeter.sayHello(), Matchers.containsString("Hello"));
+    }
 
 }
