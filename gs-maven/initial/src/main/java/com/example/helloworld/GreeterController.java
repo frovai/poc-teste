@@ -9,6 +9,6 @@ public class GreeterController {
 
     @GetMapping("/greet")
     public ResponseEntity<String> sayHello() {
-        return ResponseEntity.ok("Hello there!!");
+        return ResponseEntity.ok("Hello guys!!!");
     }
 }
