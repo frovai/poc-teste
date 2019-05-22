@@ -1,0 +1,4 @@
+aws_access_key = "SUA-ACCESS-KEY-AQUI"
+aws_secret_key = "SUA-SECRET-KEY-AQUI"
+aws_key_name = "NOME-DA-SUA-CHAVE"
+aws_key_path = "CAMINHO-DA-SUA-CHAVE-AQUI"
