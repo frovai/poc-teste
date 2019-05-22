@@ -78,6 +78,32 @@ Na opção aberta, procure **"Docker Slaves"**. Preencha esta opção conforme o
 
 7 - Configure variável global no Jenkins e adicione uma chave SSH no Jenkins:
 
+Volte na página inicial do Jenkins e vá novamente na opção **"Manage Jenkins"**. Após essa opção você poderá seguir na opção **"Configure System"**.
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Configure-System.png)
+
+Configure a variável **SPRING_SERVER** conforme abaixo:
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Global-Spring-Server.png)
+
+Volte para página inicial e seleciona a opção **"Credentials"**.
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Credentials.png)
+
+Nas telas seguintes, siga selecionando as opções conforme prints abaixo:
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Credentials-Jenkins.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Credentials-System-Globalcredentials.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Jenkins%3ECredentials%3ESystem%3EGlobalCredentials%3EAddCredentials.png)
+
+Agora configure conforme abaixo, com um ID **"DEPLOY_KEY"** e na opção "Private Key" copie e cole o conteúdo da chave criada no começo desse tutorial neste campo.
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/SSH-PrivateKey%3EDeploy-key.png)
+
+
+
 8 - Configure Job no Jenkins
 
 9 - Rode o job e valide o deploy
