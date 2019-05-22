@@ -108,5 +108,11 @@ Chave criada como variável no Jenkins.
 
 8 - Configure Job no Jenkins
 
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Create-Pipeline.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Build-Triggers-5em5min.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Pipeline-pipeline-scm.png)
+
 9 - Rode o job e valide o deploy
 
