@@ -46,3 +46,14 @@ terraform init
 terraform plan
 terraform apply
 ```
+
+5 - Configure a instalação do Jenkins:
+
+6 - Instale plugin para Docker Slave no Jenkins:
+
+7 - Configure variável global no Jenkins e adicione uma chave SSH no Jenkins:
+
+8 - Configure Job no Jenkins
+
+9 - Rode o job e valide o deploy
+
