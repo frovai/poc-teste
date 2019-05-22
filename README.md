@@ -51,6 +51,8 @@ terraform apply
 
 6 - Instale plugin para Docker Slave no Jenkins:
 
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/manage-jenkins.png)
+
 7 - Configure variável global no Jenkins e adicione uma chave SSH no Jenkins:
 
 8 - Configure Job no Jenkins
