@@ -102,7 +102,9 @@ Agora configure conforme abaixo, com um ID **"DEPLOY_KEY"** e na opção "Privat
 
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/SSH-PrivateKey%3EDeploy-key.png)
 
+Chave criada como variável no Jenkins.
 
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Chave-SSH-criada-Jenkins.png)
 
 8 - Configure Job no Jenkins
 
