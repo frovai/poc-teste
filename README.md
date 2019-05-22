@@ -27,11 +27,22 @@ Mova o arquivo que está na raíz "terraform.tfvars-bkp" para a pasta "terraform
 ```
 mv terraform-tfvars-bkp terraform-files/terraform.tfvars
 ```
-
+Edite conteúdo
+```
 # vim terraform-files/terraform.tfvars
-``` 
+
+
   aws_access_key = "SUA-ACCESS-KEY-AQUI"
   aws_secret_key = "SUA-SECRET-KEY-AQUI"
   aws_key_name = "NOME-DA-SUA-CHAVE"
   aws_key_path = "CAMINHO-DA-SUA-CHAVE-AQUI"
+```
+
+4 - Entre no caminho terraform-files/, inicialize o Terraform e aplique as configurações.
+
+```
+cd terraform-files
+terraform init
+terraform plan
+terraform apply
 ```
