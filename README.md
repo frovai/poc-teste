@@ -53,6 +53,8 @@ terraform apply
 
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/manage-jenkins.png)
 
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/manage-plugins.png)
+
 7 - Configure variável global no Jenkins e adicione uma chave SSH no Jenkins:
 
 8 - Configure Job no Jenkins
