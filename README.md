@@ -3,7 +3,7 @@
 
 ```
 wget https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip
-unzip terraform_0.11.14_linux_amd64.zip /usr/bin/
+unzip terraform_0.11.14_linux_amd64.zip -d /usr/bin/
 ```
 2 - Após isso, você precisa criar uma **AWS Access Key** e **AWS Secret Key** para seu usuário na Amazon, você pode seguir o procedimento que há no vídeo do link abaixo:
 
