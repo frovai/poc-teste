@@ -9,7 +9,7 @@ sudo systemctl daemon-reload
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo docker pull jenkins:latest
-usermod -aG docker ec2-user
+sudo usermod -aG docker ec2-user
 
 ## Configurar EBS - Inicializa o disco EBS, monta um PV, VG e LV do disco com 17G, cria pasta e monta em ext4 o disco, da permissao na pasta para usuario do jenkins, adiciona o caminho montado no FSTAB da máquina e sobe o Jenkins com o arquivo de docker-compose dele.
  
@@ -37,5 +37,4 @@ sudo /usr/bin/docker-compose -f /home/ec2-user/jenkins.yml build --no-cache
 sudo /usr/bin/docker-compose -f /home/ec2-user/jenkins.yml up -d
 sudo cd /home/ec2-user/
 sudo git clone --branch develop https://github.com/frovai/poc-teste.git
-sudo cd /home/ec2-user/poc-teste/terraform-files/jdk-8
-sudo docker build -t maven:2 .
+sudo /usr/bin/docker-compose -f /home/ec2-user/maven.yml build --no-cache

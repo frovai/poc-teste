@@ -35,6 +35,14 @@ resource "aws_instance" "jenkins-instance" {
     destination = "/home/ec2-user/jenkins.yml"
   }
   provisioner "file" {
+    source      = "maven.yml"
+    destination = "/home/ec2-user/maven.yml"
+  }
+  provisioner "file" {
+    source      = "spring.yml"
+    destination = "/home/ec2-user/spring.yml"
+  }
+  provisioner "file" {
     source      = "keys/felipe-rovai-key.pem"
     destination = "/tmp/felipe-rovai-key.pem"
   }
@@ -65,8 +73,10 @@ resource "null_resource" "Configura-Docker" {
       "sudo chmod 600 /tmp/felipe-rovai-key.pem",
       "sleep 60",
       "scp -i /tmp/felipe-rovai-key.pem -o StrictHostKeyChecking=no /home/ec2-user/configura-spring.sh ec2-user@${var.spring_instance_ip}:/home/ec2-user/configura-spring.sh", ## bootstrap SPRING
+      "scp -i /tmp/felipe-rovai-key.pem -o StrictHostKeyChecking=no /home/ec2-user/spring.yml ec2-user@${var.spring_instance_ip}:/home/ec2-user/spring.yml",
       "ssh -o StrictHostKeyChecking=no -i /tmp/felipe-rovai-key.pem ec2-user@${var.spring_instance_ip} 'chmod +x /home/ec2-user/configura-spring.sh'", ## bootstrap SPRING
       "ssh -o StrictHostKeyChecking=no -i /tmp/felipe-rovai-key.pem ec2-user@${var.spring_instance_ip} '/home/ec2-user/configura-spring.sh'", ## bootstrap SPRING
+      "scp -i /tmp/felipe-rovai-key.pem -o StrictHostKeyChecking=no /home/ec2-user/spring.yml ec2-user@${var.spring_instance_ip2}:/home/ec2-user/spring.yml",
       "scp -i /tmp/felipe-rovai-key.pem -o StrictHostKeyChecking=no /home/ec2-user/configura-spring.sh ec2-user@${var.spring_instance_ip2}:/home/ec2-user/configura-spring.sh", ## bootstrap SPRING
       "ssh -o StrictHostKeyChecking=no -i /tmp/felipe-rovai-key.pem ec2-user@${var.spring_instance_ip2} 'chmod +x /home/ec2-user/configura-spring.sh'", ## bootstrap SPRING
       "ssh -o StrictHostKeyChecking=no -i /tmp/felipe-rovai-key.pem ec2-user@${var.spring_instance_ip2} '/home/ec2-user/configura-spring.sh'", ## bootstrap SPRING

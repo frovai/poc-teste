@@ -6,7 +6,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-
 sudo chmod +x /usr/bin/docker-compose
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
-usermod -aG docker ec2-user
+sudo usermod -aG docker ec2-user
 
 ## Configurar EBS - Inicializa o disco EBS, monta um PV, VG e LV do disco com 17G, cria pasta e monta em ext4 o disco, da permissao na pasta para usuario do jenkins, adiciona o caminho montado no FSTAB da máquina e sobe o Jenkins com o arquivo de docker-compose dele.
  
@@ -31,7 +31,7 @@ sudo echo "/dev/spring/springlv   /home/ec2-user/spring    ext4    defaults    0
 sudo chmod 644 /etc/fstab
 sudo cd /home/ec2-user/
 sudo git clone --branch develop https://github.com/frovai/poc-teste.git
-sudo docker build -f /home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/Dockerfile-bootstrap -t spring:1 .
-sudo docker run -p 80:8080 --name=spring -di spring:1
+sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml build --no-cache
+sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml up -d
 
 

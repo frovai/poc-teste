@@ -11,7 +11,7 @@ resource "aws_lb" "elb-spring" {
   subnet_mapping {
     subnet_id = "${aws_subnet.spring-subnet2.id}"
   }
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   tags = {
     Environment = "production"
