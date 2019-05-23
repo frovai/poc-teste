@@ -19,6 +19,20 @@ COPY mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
 COPY settings-docker.xml /usr/share/maven/ref/
 RUN apt-get update -y
 RUN apt-get install vim -y
+RUN apt-get install -y software-properties-common \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+RUN  apt-key fingerprint 0EBFCD88
+RUN add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable"
+RUN apt-get update -y
+RUN apt-get install docker-ce docker-ce-cli containerd.io -y
+VOLUME /var/run/docker.sock
 EXPOSE 80 443 8080 
 #ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 #CMD ["mvn"]
