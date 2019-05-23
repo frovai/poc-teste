@@ -49,6 +49,18 @@ terraform apply
 
 5 - Configure a instalação do Jenkins:
 
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Unlock-Jenkins.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/InitialAdminPassword-Jenkins.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Install-suggested-plugins.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Create-First-Admin-User.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Instance-Configuration.png)
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Instalado-OK.png)
+
 6 - Instale plugin para Docker Slave no Jenkins:
 
 Na página inicial vá no canto esquerdo da tela em **"Manage Jenkins"**.
