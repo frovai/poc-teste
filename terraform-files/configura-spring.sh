@@ -31,6 +31,7 @@ sudo echo "/dev/spring/springlv   /home/ec2-user/spring    ext4    defaults    0
 sudo chmod 644 /etc/fstab
 sudo cd /home/ec2-user/
 sudo git clone --branch develop https://github.com/frovai/poc-teste.git
-sudo cd sudo docker build -f /home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/Dockerfile -t spring:1 
+sudo cd /home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/
+sudo docker build -t spring:1 .
 sudo docker run -p 80:8080 --name=spring -di spring:1
 

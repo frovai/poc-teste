@@ -58,7 +58,7 @@ variable "ami_jenkins" {
 }
 
 variable "instance_type_jenkins" {
-    default = "t2.micro"
+    default = "t2.small"
 }
 
 variable "jenkins_instance_ip" {

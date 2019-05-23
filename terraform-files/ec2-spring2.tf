@@ -18,8 +18,8 @@ resource "aws_instance" "spring-instance2" {
 resource "aws_volume_attachment" "spring-ebs-att2" {
   depends_on = ["aws_ebs_volume.spring-ebs"]
   device_name = "/dev/xvdf"
-  volume_id   = "${aws_ebs_volume.spring-ebs.id}"
-  instance_id = "${aws_instance.spring-instance.id}"
+  volume_id   = "${aws_ebs_volume.spring-ebs2.id}"
+  instance_id = "${aws_instance.spring-instance2.id}"
 }
 
 resource "aws_ebs_volume" "spring-ebs2" {
