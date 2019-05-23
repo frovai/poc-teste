@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                deleteDir()
                 sh '''
                 git clone --branch develop https://github.com/frovai/poc-teste.git
                 '''
