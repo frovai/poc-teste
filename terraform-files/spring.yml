@@ -1,0 +1,13 @@
+version: '2.0'
+
+services:
+
+  jenkins:
+    build:
+       dockerfile: Dockerfile
+       context: ./poc-teste/terraform-files/spring-boot-dockerize
+    image: spring:1
+    container_name: spring
+    restart: always
+    ports:
+      - 80:8080

@@ -35,6 +35,14 @@ resource "aws_instance" "jenkins-instance" {
     destination = "/home/ec2-user/jenkins.yml"
   }
   provisioner "file" {
+    source      = "maven.yml"
+    destination = "/home/ec2-user/maven.yml"
+  }
+  provisioner "file" {
+    source      = "spring.yml"
+    destination = "/home/ec2-user/spring.yml"
+  }
+  provisioner "file" {
     source      = "keys/felipe-rovai-key.pem"
     destination = "/tmp/felipe-rovai-key.pem"
   }

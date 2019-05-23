@@ -1,0 +1,9 @@
+version: '2.0'
+
+services:
+
+  jenkins:
+    build:
+       dockerfile: Dockerfile
+       context: ./poc-teste/terraform-files/jdk-8
+    image: maven:2
