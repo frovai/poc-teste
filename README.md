@@ -151,3 +151,6 @@ Script Path : terraform-files/CI/Jenkinsfile
 
 9 - Rode o job e valide o deploy
 
+Na opção **Build now"** rode o deploy e espere o deploy. Os passos do job estão descritos no Jenkinsfile.
+
+![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Maven-job-deploy.png)
