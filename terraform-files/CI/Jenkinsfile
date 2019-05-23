@@ -1,4 +1,12 @@
 pipeline {
+    agent { label "master" }
+    stages {
+        stage('CleanWorkspace') {
+            steps {
+                cleanWs()
+            }
+        }
+    }
     agent { 
         docker {
             image 'maven:2'
