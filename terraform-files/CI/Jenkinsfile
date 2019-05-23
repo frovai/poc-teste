@@ -45,10 +45,12 @@ pipeline {
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo rm -rf /home/ec2-user/poc-teste"
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "cd /home/ec2-user"
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "git clone --branch develop https://github.com/frovai/poc-teste.git"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "cp /home/ec2-user/poc-teste/deploy-api.sh /home/ec2-user/deploy-api.sh"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "cp /home/ec2-user/poc-teste/terraform-files/spring.yml /home/ec2-user/spring.yml"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "chmod 755 /home/ec2-user/deploy-api.sh"
                 scp -i ${DEPLOY_KEY} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER}:/home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/target
-                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml down"
-                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml build --no-cache"
-                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml up -d"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "export $BUILD_NUMBER=$BUILD_NUMBER"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "bash -x deploy-api.sh $BUILD_NUMBER"
                 sleep 90
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo rm -rf /home/ec2-user/poc-teste"
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "cd /home/ec2-user"
