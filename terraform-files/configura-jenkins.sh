@@ -32,7 +32,7 @@ sudo mount -t ext4 /dev/jenkins/jenkinslv /home/ec2-user/jenkins
 sudo chmod 777 /etc/fstab
 sudo echo "/dev/jenkins/jenkinslv   /home/ec2-user/jenkins    ext4    defaults    0    0" >> /etc/fstab
 sudo chmod 644 /etc/fstab
-sudo chown -R 1000:1000 /home/ec2-user/jenkins
+sudo chmod -R 777 /home/ec2-user/jenkins
 sudo /usr/bin/docker-compose -f /home/ec2-user/jenkins.yml build --no-cache
 sudo /usr/bin/docker-compose -f /home/ec2-user/jenkins.yml up -d
 sudo cd /home/ec2-user/
