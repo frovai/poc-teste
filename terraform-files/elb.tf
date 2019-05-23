@@ -45,13 +45,13 @@ resource "aws_lb_target_group" "elb-target-group" {
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.vpc.id}"
   health_check {
-    healthy_threshold   = 2
+    healthy_threshold   = 5
     unhealthy_threshold = 2
     timeout             = "10"
     port                = "80"
     path                = "/message"
     protocol            = "HTTP"
-    interval            = 30
+    interval            = 15
     matcher             = "200"
   }
 }
