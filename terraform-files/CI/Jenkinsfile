@@ -42,13 +42,15 @@ pipeline {
             withCredentials([sshUserPrivateKey(credentialsId: 'DEPLOY_KEY', keyFileVariable: 'DEPLOY_KEY')]) {
                 sh '''
                 cd poc-teste/terraform-files/spring-boot-dockerize/target
-                scp -i ${DEPLOY_KEY} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER}:/home/ec2-user/target/spring-boot-docker.jar
-                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo docker build -f /home/ec2-user/Dockerfile -t spring:1 ."
-                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo docker run -p 80:8080 -di spring:1"
+                scp -i ${DEPLOY_KEY} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER}:/home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/target
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml down"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml build --no-cache"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml up -d"
                 sleep 90
-                scp -i ${DEPLOY_KEY} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER2}:/home/ec2-user/target/spring-boot-docker.jar
-                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo docker build -f /home/ec2-user/Dockerfile -t spring:1 ."
-                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo docker run -p 80:8080 -di spring:1"
+                scp -i ${DEPLOY_KEY} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER2}:/home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/target
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml down"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml build --no-cache"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo /usr/bin/docker-compose -f /home/ec2-user/spring.yml up -d"
                 '''
                 }
             }
