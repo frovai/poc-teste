@@ -24,6 +24,6 @@ resource "aws_route_table" "spring-rt2" {
 
 # Assign the route table to the SPRING Subnet
 resource "aws_route_table_association" "spring-rt2" {
-  subnet_id      = "${aws_subnet.spring-subnet.id}"
-  route_table_id = "${aws_route_table.spring-rt.id}"
+  subnet_id      = "${aws_subnet.spring-subnet2.id}"
+  route_table_id = "${aws_route_table.spring-rt2.id}"
 }

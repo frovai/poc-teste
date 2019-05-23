@@ -11,25 +11,25 @@ resource "aws_instance" "spring-instance2" {
         volume_size = 20
       }
   tags {
-    Name = "SPRING"
+    Name = "SPRING2"
   }
 }
 
 resource "aws_volume_attachment" "spring-ebs-att2" {
-  depends_on = ["aws_ebs_volume.spring-ebs"]
+  depends_on = ["aws_ebs_volume.spring-ebs2"]
   device_name = "/dev/xvdf"
   volume_id   = "${aws_ebs_volume.spring-ebs2.id}"
   instance_id = "${aws_instance.spring-instance2.id}"
 }
 
 resource "aws_ebs_volume" "spring-ebs2" {
-  depends_on = ["aws_instance.spring-instance"]
+  depends_on = ["aws_instance.spring-instance2"]
   availability_zone = "${var.aws_availability_zone}"
   size              = 20
   type = "gp2"
 
   tags {
-    Name = "SPRING EBS"
+    Name = "SPRING EBS2"
   }
 }
 
