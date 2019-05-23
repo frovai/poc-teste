@@ -49,15 +49,27 @@ terraform apply
 
 5 - Configure a instalação do Jenkins:
 
+Abra a página inicial do Jenkins com o IP púlbico que a AWS gerou para você.
+
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Unlock-Jenkins.png)
+
+Você terá que logar na instância do Jenkins com a chave ssh criada no começo desse tutorial e rodar o comando **"docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword"** para pegar a senha para desbloquear a instalação do Jenkins.
 
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/InitialAdminPassword-Jenkins.png)
 
+Prossiga instalando os plugins recomendados.
+
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Install-suggested-plugins.png)
+
+Crie um usuário conforme desejado.
 
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Create-First-Admin-User.png)
 
+Apenas confirme a tela a seguir.
+
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Instance-Configuration.png)
+
+Instalação finalizada.
 
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Instalado-OK.png)
 
