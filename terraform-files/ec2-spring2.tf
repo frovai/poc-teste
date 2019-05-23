@@ -24,7 +24,7 @@ resource "aws_volume_attachment" "spring-ebs-att2" {
 
 resource "aws_ebs_volume" "spring-ebs2" {
   depends_on = ["aws_instance.spring-instance2"]
-  availability_zone = "${var.aws_availability_zone}"
+  availability_zone = "${var.aws_availability_zone2}"
   size              = 20
   type = "gp2"
 
