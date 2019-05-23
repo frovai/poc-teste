@@ -144,7 +144,7 @@ Logo mais abaixo na tela, configure conforme abaixo.
 ```
 SCM : Git
 Repository URL: https://github.com/frovai/poc-teste.git
-Branch Specifier (blank for 'any') : * /master
+Branch Specifier (blank for 'any') : */master
 Script Path : terraform-files/CI/Jenkinsfile
 ```
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Pipeline-pipeline-scm.png)
