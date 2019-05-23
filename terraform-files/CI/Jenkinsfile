@@ -50,7 +50,6 @@ pipeline {
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo chmod 755 /home/ec2-user/deploy-api.sh"
                 scp -i ${DEPLOY_KEY} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER}:/home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/target
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo su ; export BUILD_NUMBER=$BUILD_NUMBER ; sudo bash -x deploy-api.sh $BUILD_NUMBER"
-                sleep 90
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo rm -rf /home/ec2-user/poc-teste"
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "cd /home/ec2-user"
                 ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "git clone --branch develop https://github.com/frovai/poc-teste.git"
