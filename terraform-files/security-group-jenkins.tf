@@ -14,7 +14,14 @@ resource "aws_security_group" "jenkins-sg" {
         from_port = 80
         to_port = 80
         protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = ["10.23.0.0/16"]
+        description = "IP Mundo"
+    }
+    ingress {
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+        cidr_blocks = ["177.143.150.143/32"]
         description = "IP Mundo"
     }
     egress {

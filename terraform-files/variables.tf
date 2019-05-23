@@ -33,6 +33,10 @@ variable "spring_subnet_cidr" {
   description = "CIDR for the spring subnet"
   default     = "10.23.3.0/24"
 }
+variable "spring_subnet_cidr2" {
+  description = "CIDR for the spring subnet"
+  default     = "10.23.4.0/24"
+}
 ## RECURSOS EC2 NGINX
 
 variable "ami_nginx" {
@@ -75,6 +79,6 @@ variable "spring_instance_ip" {
   default = "10.23.3.10"
 }
 
-
-
-
+variable "spring_instance_ip2" {
+  default = "10.23.4.10"
+}
