@@ -10,6 +10,7 @@ pipeline {
             steps {
                 cleanWs()
                 sh '''
+                w
                 git clone --branch develop https://github.com/frovai/poc-teste.git
                 '''
             }
