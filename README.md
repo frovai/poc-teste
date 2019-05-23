@@ -141,11 +141,10 @@ Na tela seguinte tique a opção **"Build periodically"** com o valor **"H/5 * *
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Build-Triggers-5em5min.png)
 
 Logo mais abaixo na tela, configure conforme abaixo.
-**SCM : Git
-Repository URL: https://github.com/frovai/poc-teste.git
-Branch Specifier (blank for 'any') : * /master
-Script Path : terraform-files/CI/Jenkinsfile
-**
+**SCM : Git**
+**Repository URL: https://github.com/frovai/poc-teste.git**
+**Branch Specifier (blank for 'any') : * /master**
+**Script Path : terraform-files/CI/Jenkinsfile**
 
 ![alt text](https://github.com/frovai/poc-teste/blob/develop/images/Pipeline-pipeline-scm.png)
 
