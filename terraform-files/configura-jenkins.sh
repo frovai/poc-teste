@@ -1,7 +1,7 @@
 #!/bin/bash
 # Update , instalação do docker e docker-compose, configurar para startar no boot, pull da imagem do Jenkins e permissionamento de usuario
 sudo yum update -y
-sudo yum install mtr htop telnet sysstat tcpdump docker.x86_64 -y
+sudo yum install mtr git htop telnet sysstat tcpdump docker.x86_64 -y
 sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
 sudo chmod +x /usr/bin/docker-compose
 sudo mv /home/ec2-user/docker.service /usr/lib/systemd/system/docker.service
@@ -35,3 +35,7 @@ sudo chmod 644 /etc/fstab
 sudo chown -R 1000:1000 /home/ec2-user/jenkins
 sudo /usr/bin/docker-compose -f /home/ec2-user/jenkins.yml build --no-cache
 sudo /usr/bin/docker-compose -f /home/ec2-user/jenkins.yml up -d
+sudo cd /home/ec2-user/
+sudo git clone --branch develop https://github.com/frovai/poc-teste.git
+sudo cd /home/ec2-user/poc-teste/terraform-files/jdk-8
+sudo docker build -t maven:2 .

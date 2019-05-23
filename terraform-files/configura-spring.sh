@@ -1,7 +1,7 @@
 #!/bin/bash
 # Update , instalação do docker e docker-compose, configurar para startar no boot, pull da imagem do Jenkins e permissionamento de usuario
 sudo yum update -y
-sudo yum install mtr htop telnet sysstat tcpdump docker.x86_64 -y
+sudo yum install git mtr htop telnet sysstat tcpdump docker.x86_64 -y
 sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
 sudo chmod +x /usr/bin/docker-compose
 sudo systemctl start docker.service
@@ -29,3 +29,9 @@ sudo mount -t ext4 /dev/spring/springlv /home/ec2-user/spring
 sudo chmod 777 /etc/fstab
 sudo echo "/dev/spring/springlv   /home/ec2-user/spring    ext4    defaults    0    0" >> /etc/fstab
 sudo chmod 644 /etc/fstab
+sudo cd /home/ec2-user/
+sudo git clone --branch develop https://github.com/frovai/poc-teste.git
+sudo cd /home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/
+sudo docker build -t spring:1 .
+sudo docker run -p 80:8080 --name=spring -di spring:1
+
