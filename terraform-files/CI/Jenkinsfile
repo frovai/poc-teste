@@ -17,7 +17,7 @@ pipeline {
         stage('Maven Install') {
             steps {
                 sh '''
-                cd poc-teste/spring-boot-dockerize/
+                cd poc-teste/terraform-files/spring-boot-dockerize/
                 mvn compile
                 mvn install
                 '''
@@ -26,7 +26,7 @@ pipeline {
         stage('Maven Test') {
             steps {
                 sh '''
-                cd poc-teste/spring-boot-dockerize/
+                cd poc-teste/terraform-files/spring-boot-dockerize/
                 mvn test
                 '''
             }
@@ -41,7 +41,7 @@ pipeline {
             steps {
             withCredentials([sshUserPrivateKey(credentialsId: 'bastion_key', keyFileVariable: 'bastion_key')]) {
                 sh '''
-                cd poc-teste/spring-boot-dockerize/target
+                cd poc-teste/terraform-files/spring-boot-dockerize/target
                 scp -i ${bastion_key} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER}:/home/ec2-user/target/spring-boot-docker.jar
                 ssh -o StrictHostKeyChecking=no -i ${bastion_key} ec2-user@${SPRING_SERVER} "sudo docker build -f /home/ec2-user/Dockerfile -t spring:1 ."
                 ssh -o StrictHostKeyChecking=no -i ${bastion_key} ec2-user@${SPRING_SERVER} "sudo docker run -p 80:8080 -di spring:1"
