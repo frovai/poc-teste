@@ -15,7 +15,7 @@ resource "aws_route_table" "spring-rt" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    nat_gateway_id = "${aws_nat_gateway.nat-gateway.id}"
+    gateway_id = "${aws_internet_gateway.internet-gateway.id}"
   }
 
   tags {

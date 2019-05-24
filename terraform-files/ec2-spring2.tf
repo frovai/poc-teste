@@ -5,7 +5,7 @@ resource "aws_instance" "spring-instance2" {
   subnet_id         = "${aws_subnet.spring-subnet2.id}"
   private_ip        = "${var.spring_instance_ip2}"
   key_name          = "${var.aws_key_name}"
-  associate_public_ip_address = false
+  associate_public_ip_address = true
   vpc_security_group_ids = ["${aws_security_group.spring-sg.id}"] 
   root_block_device {
         volume_size = 20
