@@ -2,5 +2,6 @@
 terraform.tfvars
 terraform.tfstate
 terraform.tfstate.backup
-keys/felipe-rovai-key.pem
+terraform-files/keys/felipe-rovai-key.pem
 .terraform/*
+terraform-files/.terraform*

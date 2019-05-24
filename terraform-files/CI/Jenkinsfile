@@ -1,0 +1,66 @@
+pipeline {
+    agent { 
+        docker {
+            image 'maven:2'
+            args '-v /var/run/docker.sock:/var/run/docker.sock --user=root'
+        }
+    }            
+    stages {
+        stage('Checkout') {
+            steps {
+                cleanWs()
+                sh '''
+                git clone --branch develop https://github.com/frovai/poc-teste.git
+                '''
+            }
+        }
+        stage('Maven Install') {
+            steps {
+                sh '''
+                cd poc-teste/terraform-files/spring-boot-dockerize/
+                mvn compile
+                mvn install
+                '''
+            }
+        }
+        stage('Maven Test') {
+            steps {
+                sh '''
+                cd poc-teste/terraform-files/spring-boot-dockerize/
+                mvn test
+                '''
+            }
+        } 
+        //stage('INFRA - TESTE') {
+        //    steps {
+        //        sh '''
+        //        '''
+        //    }
+        //}    
+        stage('Maven Deploy Artifact') {
+            steps {
+            withCredentials([sshUserPrivateKey(credentialsId: 'DEPLOY_KEY', keyFileVariable: 'DEPLOY_KEY')]) {
+                sh '''
+                cd poc-teste/terraform-files/spring-boot-dockerize/target
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo rm -rf /home/ec2-user/poc-teste"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "cd /home/ec2-user"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "git clone --branch develop https://github.com/frovai/poc-teste.git"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo cp /home/ec2-user/poc-teste/deploy-api.sh /home/ec2-user/deploy-api.sh"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo cp /home/ec2-user/poc-teste/terraform-files/spring.yml /home/ec2-user/spring.yml"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo chmod 755 /home/ec2-user/deploy-api.sh"
+                scp -i ${DEPLOY_KEY} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER}:/home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/target
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER} "sudo su ; export BUILD_NUMBER=$BUILD_NUMBER ; sudo bash -x deploy-api.sh $BUILD_NUMBER"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo rm -rf /home/ec2-user/poc-teste"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "cd /home/ec2-user"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "git clone --branch develop https://github.com/frovai/poc-teste.git"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo cp /home/ec2-user/poc-teste/deploy-api.sh /home/ec2-user/deploy-api.sh"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo cp /home/ec2-user/poc-teste/terraform-files/spring.yml /home/ec2-user/spring.yml"
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo chmod 755 /home/ec2-user/deploy-api.sh"
+                scp -i ${DEPLOY_KEY} -o StrictHostKeyChecking=no spring-boot-docker.jar ec2-user@${SPRING_SERVER2}:/home/ec2-user/poc-teste/terraform-files/spring-boot-dockerize/target
+                ssh -o StrictHostKeyChecking=no -i ${DEPLOY_KEY} ec2-user@${SPRING_SERVER2} "sudo su ; export BUILD_NUMBER=$BUILD_NUMBER ; sudo bash -x deploy-api.sh $BUILD_NUMBER"
+                '''
+                }
+            }
+        }        
+    }
+}
